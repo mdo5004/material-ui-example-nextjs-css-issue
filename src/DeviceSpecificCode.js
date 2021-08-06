@@ -33,7 +33,7 @@ const backgrounds = {
 function UnconnectedResponsiveDeviceSpecificCode(props) {
   const { className, targetedDevice } = props;
   const classes = useStyles();
-  return <div suppressHydrationWarning={true} className={clsx(classes.root, className, classes[targetedDevice])}>
+  return <div className={clsx(classes.root, className, classes[targetedDevice])}>
     <h1>Using redux property "targetedDevice":</h1>
     <p suppressHydrationWarning={true}>store.targetedDevice = {targetedDevice}</p>
     <p suppressHydrationWarning={true}>
