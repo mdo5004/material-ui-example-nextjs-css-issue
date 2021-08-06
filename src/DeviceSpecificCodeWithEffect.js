@@ -30,31 +30,34 @@ const backgrounds = {
   tablet: 'green',
   mobile: 'red',
 };
-function UnconnectedDeviceSpecificCode(props) {
+function UnconnectedDeviceSpecificCodeWithEffect(props) {
   const { className, targetedDevice } = props;
-  const classes = useStyles();
-
+  const ssr_classes = useStyles();
+  const [loaded, setLoaded] = React.useState(false);
+  React.useEffect(() => {
+    setLoaded(true);
+  }, []);
+  const classes = loaded ? ssr_classes : {};
+  console.log(classes);
   return <div className={clsx(classes.root, className, classes[targetedDevice])}>
-    <h1>Depends on a client-side prop</h1>
+    <h1>Depends on a client-side prop but</h1>
+    <h2>also includes an effect hook</h2>
     <p suppressHydrationWarning={true}>
-      My background should be {backgrounds[targetedDevice]}
+      My background should be {loaded ? backgrounds[targetedDevice] : ''}
     </p>
     <p>
-      But I'm not right all the time... only if you navigate to me using a <code>next/link</code> link.
-    </p>
-    <p>
-      If you hit refresh, I show the wrong background color.
+      Unlike my brother, my color is correct every time, even on refresh.
     </p>
   </div>;
 }
 
-UnconnectedDeviceSpecificCode.defaultProps = {
+UnconnectedDeviceSpecificCodeWithEffect.defaultProps = {
   className: '',
 };
 
-UnconnectedDeviceSpecificCode.propTypes = {
+UnconnectedDeviceSpecificCodeWithEffect.propTypes = {
   className: PropTypes.string,
   targetedDevice: PropTypes.string,
 };
-const ConnectedDeviceSpecificCode = connect(({ targetedDevice }) => ({ targetedDevice }))(UnconnectedDeviceSpecificCode);
-export default ConnectedDeviceSpecificCode;
+const ConnectedDeviceSpecificCodeWithEffect = connect(({ targetedDevice }) => ({ targetedDevice }))(UnconnectedDeviceSpecificCodeWithEffect);
+export default ConnectedDeviceSpecificCodeWithEffect;

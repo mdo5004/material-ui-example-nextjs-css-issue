@@ -5,8 +5,11 @@ import Box from '@material-ui/core/Box';
 import ProTip from '../src/ProTip';
 import Link from '../src/Link';
 import Copyright from '../src/Copyright';
+import ResponsiveDeviceSpecificCode from '../src/DeviceSpecificCodeWithEffect';
 import DeviceSpecificCode from '../src/DeviceSpecificCode';
-import ResponsiveDeviceSpecificCode from '../src/ResponsiveDeviceSpecificCode';
+import dynamic from 'next/dynamic';
+
+// const DeviceSpecificCode = dynamic(() => import('../src/DeviceSpecificCode'), { ssr: false, loading: () => <div></div> });
 
 export default function Index() {
   return (
