@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
+import { Typography } from '@material-ui/core';
 
 const useStyles = makeStyles({
   root: {
@@ -38,7 +39,7 @@ function UnconnectedDeviceSpecificCodeWithEffect(props) {
     setLoaded(true);
   }, []);
   const classes = loaded ? ssr_classes : {};
-  console.log(classes);
+
   return <div className={clsx(classes.root, className, classes[targetedDevice])}>
     <h1>Depends on a client-side prop but</h1>
     <h2>also includes an effect hook</h2>
@@ -48,6 +49,9 @@ function UnconnectedDeviceSpecificCodeWithEffect(props) {
     <p>
       Unlike my brother, my color is correct every time, even on refresh.
     </p>
+    <Typography variant={targetedDevice === 'desktop' ? 'caption' : 'button'}>
+      The formatting of this text depends on the same prop, and is inconsistent. It <i>should</i> be all {targetedDevice === 'desktop' ? 'lowercase' : 'uppercase'}.
+    </Typography>
   </div>;
 }
 

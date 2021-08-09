@@ -43,8 +43,9 @@ function UnconnectedDeviceSpecificCode(props) {
       But I'm not right all the time... only if you navigate to me using a <code>next/link</code> link.
     </p>
     <p>
-      If you hit refresh, I show the wrong background color.
+      If you navigate right to me or hit refresh, I show the wrong background color.
     </p>
+    <p>Sometimes if you hot-reload, I show the right color.</p>
   </div>;
 }
 
