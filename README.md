@@ -9,3 +9,11 @@ cd material-ui-example-nextjs-css-issue
 npm install
 npm run dev
 ```
+## Origin
+
+Example based on [this Material-UI example. Clone the repo](https://github.com/mui-org/material-ui):
+
+```sh
+curl https://codeload.github.com/mui-org/material-ui/tar.gz/master | tar -xz --strip=2  material-ui-master/examples/nextjs
+cd nextjs
+```
