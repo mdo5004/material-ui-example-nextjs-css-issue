@@ -1,25 +1,11 @@
-# Next.js example
+# Inconsistent CSS Rendering with Next.js Static Pages
 
-## How to use
-
-Download the example [or clone the repo](https://github.com/mui-org/material-ui):
-
-```sh
-curl https://codeload.github.com/mui-org/material-ui/tar.gz/master | tar -xz --strip=2  material-ui-master/examples/nextjs
-cd nextjs
-```
-
-Install it and run:
+## Installation
+Clone the repo and run a dev server:
 
 ```sh
+git clone https://github.com/mdo5004/material-ui-example-nextjs-css-issue.git
+cd material-ui-example-nextjs-css-issue
 npm install
 npm run dev
 ```
-
-or:
-
-[![Edit on CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/mui-org/material-ui/tree/master/examples/nextjs)
-
-## The idea behind the example
-
-[Next.js](https://github.com/zeit/next.js) is a framework for server-rendered React apps.

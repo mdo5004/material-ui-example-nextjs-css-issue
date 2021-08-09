@@ -41,8 +41,8 @@ function UnconnectedDeviceSpecificCodeWithEffect(props) {
   const classes = loaded ? ssr_classes : {};
 
   return <div className={clsx(classes.root, className, classes[targetedDevice])}>
-    <h1>Depends on a client-side prop but</h1>
-    <h2>also includes an effect hook</h2>
+    <h1>I depend on a client-side prop but</h1>
+    <h2>I use an effect hook to re-hydrate myself</h2>
     <p suppressHydrationWarning={true}>
       My background should be {loaded ? backgrounds[targetedDevice] : ''}
     </p>
@@ -50,7 +50,8 @@ function UnconnectedDeviceSpecificCodeWithEffect(props) {
       Unlike my brother, my color is correct every time, even on refresh.
     </p>
     <Typography variant={targetedDevice === 'desktop' ? 'caption' : 'button'}>
-      The formatting of this text depends on the same prop, and is inconsistent. It <i>should</i> be all {targetedDevice === 'desktop' ? 'lowercase' : 'uppercase'}.
+      But this doesn't work for my children:<br />
+      The formatting of this text depends on the same prop (targetedDevice). It <i>should</i> be all {targetedDevice === 'desktop' ? 'lowercase' : 'uppercase'} on {targetedDevice}.
     </Typography>
   </div>;
 }
