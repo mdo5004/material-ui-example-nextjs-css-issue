@@ -67,11 +67,8 @@ function UnconnectedDeviceSpecificCodeWithEffect(props) {
     <p>
       Unlike my brother, my color is correct every time, even on refresh.
     </p>
-    <Typography variant={targetedDevice === 'desktop' ? 'caption' : 'button'}>
-      But this doesn't work for my children:<br />
-      The formatting of this text depends on the same prop (targetedDevice). It <i>should</i> be all {targetedDevice === 'desktop' ? 'lowercase' : 'uppercase'} on {targetedDevice}.<br />
-      But it doesn't seem to detect a change in props from before to after hydrating...
-    </Typography>
+
+    <MyComponent targetedDevice={targetedDevice} />
   </div>;
 }
 
@@ -84,3 +81,10 @@ UnconnectedDeviceSpecificCodeWithEffect.propTypes = {
   targetedDevice: PropTypes.string,
 };
 export default UnconnectedDeviceSpecificCodeWithEffect;
+
+function MyComponent({ targetedDevice }) {
+  return <Typography variant={targetedDevice === 'desktop' ? 'caption' : 'button'}>
+    The formatting of this text depends on the same prop (targetedDevice). It <i>should</i> be all {targetedDevice === 'desktop' ? 'lowercase' : 'uppercase'} on {targetedDevice}.<br />
+    This seems to work.
+  </Typography>
+}
