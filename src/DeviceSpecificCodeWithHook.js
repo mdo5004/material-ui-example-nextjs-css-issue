@@ -31,24 +31,38 @@ const backgrounds = {
   tablet: 'green',
   mobile: 'red',
 };
-function UnconnectedDeviceSpecificCodeWithEffect(props) {
-  const { className, targetedDevice } = props;
-  const ssr_classes = useStyles();
-  const [loaded, setLoaded] = React.useState(false);
+
+function useTargetedDevice() {
+  const [targetedDevice, setTargetedDevice] = React.useState('');
   React.useEffect(() => {
-    if (!loaded) {
-      setLoaded(true);
+    const is_iPhone = Boolean(navigator.userAgent.match(/iPhone/));
+    const is_iPad = Boolean(navigator.userAgent.match(/iPad/));
+
+    const isTouch = typeof window !== 'undefined' && window.matchMedia('(pointer: coarse) and (hover: none)').matches;
+
+    let device;
+    if (is_iPhone || (isTouch && typeof window !== 'undefined' && window.matchMedia('(max-width: 730px)').matches)) {
+      device = 'mobile';
+    } else if (is_iPad || (isTouch && typeof window !== 'undefined' && window.matchMedia('(max-width: 1025px)'))) {
+      device = (window.orientation && window.orientation > 0) ? 'desktop' : 'tablet';
+    } else {
+      device = 'desktop';
     }
+    setTargetedDevice(device);
   }, []);
+  return targetedDevice;
+}
 
-  const classes = loaded ? ssr_classes : {};
+function UnconnectedDeviceSpecificCodeWithEffect(props) {
+  const { className } = props;
+  const classes = useStyles();
+  const targetedDevice = useTargetedDevice();
 
-  console.log(targetedDevice);
   return <div className={clsx(classes.root, className, classes[targetedDevice])}>
     <h1>I depend on a client-side prop but</h1>
-    <h2>I use an effect hook to re-hydrate myself</h2>
+    <h2>I use the useTargetedDevice hook to re-hydrate myself</h2>
     <p suppressHydrationWarning={true}>
-      My background should be {loaded ? backgrounds[targetedDevice] : ''}
+      My background should be {backgrounds[targetedDevice]}
     </p>
     <p>
       Unlike my brother, my color is correct every time, even on refresh.
@@ -69,5 +83,4 @@ UnconnectedDeviceSpecificCodeWithEffect.propTypes = {
   className: PropTypes.string,
   targetedDevice: PropTypes.string,
 };
-const ConnectedDeviceSpecificCodeWithEffect = connect(({ targetedDevice }) => ({ targetedDevice }))(UnconnectedDeviceSpecificCodeWithEffect);
-export default ConnectedDeviceSpecificCodeWithEffect;
+export default UnconnectedDeviceSpecificCodeWithEffect;

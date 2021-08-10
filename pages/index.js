@@ -8,6 +8,7 @@ import Copyright from '../src/Copyright';
 import ResponsiveDeviceSpecificCode from '../src/DeviceSpecificCodeWithEffect';
 import DeviceSpecificCode from '../src/DeviceSpecificCode';
 import dynamic from 'next/dynamic';
+import DeviceSpecificCodeWithHook from '../src/DeviceSpecificCodeWithHook';
 
 // const DeviceSpecificCode = dynamic(() => import('../src/DeviceSpecificCode'), { ssr: false, loading: () => <div></div> });
 
@@ -21,8 +22,9 @@ export default function Index() {
         <Link href="/about" color="secondary">
           Go to the about page
         </Link>
-        <DeviceSpecificCode />
-        <ResponsiveDeviceSpecificCode />
+        {/* <DeviceSpecificCode /> */}
+        <DeviceSpecificCodeWithHook />
+        {/* <ResponsiveDeviceSpecificCode /> */}
         <ProTip />
         <Copyright />
       </Box>
